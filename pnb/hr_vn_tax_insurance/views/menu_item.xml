@@ -1,0 +1,9 @@
+<odoo>
+    <menuitem id="menu_hr_insurance" name="Insurance" sequence="10"/>
+
+    <menuitem id="menu_hr_social_insurance" name="Social Insurance" parent="menu_hr_insurance" sequence="20" action="action_hr_social_insurance"/>
+
+     <menuitem id="menu_hr_unemployment_insurance" name="Unemployment Insurance" parent="menu_hr_insurance" sequence="30" action="action_hr_unemployment_insurance"/>
+
+     <menuitem id="menu_hr_health_insurance" name="Health Insurance" parent="menu_hr_insurance" sequence="40" action="action_hr_health_insurance"/>
+</odoo>

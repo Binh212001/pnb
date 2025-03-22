@@ -1,0 +1,26 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_health_insurance_employee,HR Health Insurance Employee,model_hr_health_insurance,group_isr_employee,1,0,0,0
+access_hr_health_insurance_officer,HR Health Insurance Officer,model_hr_health_insurance,group_isr_officer,1,1,0,0
+access_hr_health_insurance_admin,HR Health Insurance Admin,model_hr_health_insurance,group_isr_admin,1,1,1,1
+
+access_hr_health_insurance_rule_admin,HR Health Insurance Rule Admin,model_hr_health_insurance_rule,group_isr_admin,1,1,1,1
+
+access_res_config_settings_admin,Config Settings Admin,model_res_config_settings,group_isr_admin,1,1,1,1
+
+access_hr_employee_employee,HR Employee Employee,model_hr_employee,group_isr_employee,1,0,0,0
+access_hr_employee_officer,HR Employee Officer,model_hr_employee,group_isr_officer,1,1,0,0
+access_hr_employee_admin,HR Employee Admin,model_hr_employee,group_isr_admin,1,1,1,1
+
+access_hr_insurance_benefits_admin,HR Insurance Benefits Admin,model_hr_insurance_benefits,group_isr_admin,1,1,1,1
+
+access_hr_insurance_history_employee,HR Insurance History Employee,model_hr_insurance_history,group_isr_employee,1,0,0,0
+access_hr_insurance_history_officer,HR Insurance History Officer,model_hr_insurance_history,group_isr_officer,1,1,0,0
+access_hr_insurance_history_admin,HR Insurance History Admin,model_hr_insurance_history,group_isr_admin,1,1,1,1
+
+access_hr_social_insurance_employee,HR Social Insurance Employee,model_hr_social_insurance,group_isr_employee,1,0,0,0
+access_hr_social_insurance_officer,HR Social Insurance Officer,model_hr_social_insurance,group_isr_officer,1,1,0,0
+access_hr_social_insurance_admin,HR Social Insurance Admin,model_hr_social_insurance,group_isr_admin,1,1,1,1
+
+access_hr_unemployment_insurance_employee,HR Unemployment Insurance Employee,model_hr_unemployment_insurance,group_isr_employee,1,0,0,0
+access_hr_unemployment_insurance_officer,HR Unemployment Insurance Officer,model_hr_unemployment_insurance,group_isr_officer,1,1,0,0
+access_hr_unemployment_insurance_admin,HR Unemployment Insurance Admin,model_hr_unemployment_insurance,group_isr_admin,1,1,1,1
