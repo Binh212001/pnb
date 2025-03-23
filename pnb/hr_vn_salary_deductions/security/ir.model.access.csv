@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hr_vn_salary_deductions_hr_vn_salary_deductions,hr_vn_salary_deductions.hr_vn_salary_deductions,model_hr_vn_salary_deductions_hr_vn_salary_deductions,base.group_user,1,1,1,1

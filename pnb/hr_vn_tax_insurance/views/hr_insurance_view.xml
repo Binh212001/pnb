@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_hr_insurance_tree" model="ir.ui.view">
+        <field name="name">hr.insurance.tree</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="insurance_type"/>
+                <field name="insurance_number"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_insurance_form" model="ir.ui.view">
+        <field name="name">hr.insurance.form</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="employee_id"/>
+                        <field name="insurance_type"/>
+                        <field name="insurance_number"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_insurance_search" model="ir.ui.view">
+        <field name="name">hr.insurance.search</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="insurance_type"/>
+                <filter name="filter_active" string="Active" domain="[('status', '=', 'active')]"/>
+                <filter name="filter_expired" string="Expired" domain="[('status', '=', 'expired')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_insurance" model="ir.actions.act_window">
+        <field name="name">Insurance</field>
+        <field name="res_model">hr.insurance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

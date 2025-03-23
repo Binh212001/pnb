@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action mở danh sách lịch sử bảo hiểm -->
+    <record id="action_insurance_history" model="ir.actions.act_window">
+        <field name="name">Insurance History</field>
+        <field name="res_model">hr.insurance.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu con trong "Insurance" -->
+
+
+    <!-- Tree View (Danh sách lịch sử bảo hiểm) -->
+    <record id="view_insurance_history_tree" model="ir.ui.view">
+        <field name="name">hr.insurance.history.tree</field>
+        <field name="model">hr.insurance.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="insurance_id"/>
+                <field name="insurance_type"/>
+                <field name="record_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View (Chi tiết lịch sử bảo hiểm) -->
+    <record id="view_insurance_history_form" model="ir.ui.view">
+        <field name="name">hr.insurance.history.form</field>
+        <field name="model">hr.insurance.history</field>
+        <field name="arch" type="xml">
+            <form string="Insurance History">
+                <sheet>
+                    <group>
+                        <field name="employee_id" required="1"/>
+                        <field name="insurance_id" required="1"/>
+                        <field name="insurance_type" readonly="1"/>
+                        <field name="record_date" required="1"/>
+                        <field name="state"/>
+                    </group>
+
+                    <!-- Fields tùy theo loại bảo hiểm -->
+                    <notebook>
+                        <page string="Health Insurance (BHYT)"
+                              attrs="{'invisible': [('insurance_type', '!=', 'health')]}">
+                            <group>
+                                <field name="hospital_name"/>
+                                <field name="diagnosis"/>
+                                <field name="treatment"/>
+                                <field name="cost"/>
+                            </group>
+                        </page>
+
+                        <page string="Social Insurance (BHXH)"
+                              attrs="{'invisible': [('insurance_type', '!=', 'social')]}">
+                            <group>
+                                <field name="contribution_months"/>
+                                <field name="benefit_amount"/>
+                                <field name="claim_reason"/>
+                            </group>
+                        </page>
+
+                        <page string="Unemployment Insurance (BHTN)"
+                              attrs="{'invisible': [('insurance_type', '!=', 'unemployment')]}">
+                            <group>
+                                <field name="unemployment_period"/>
+                                <field name="allowance_amount"/>
+                                <field name="job_search_status"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
