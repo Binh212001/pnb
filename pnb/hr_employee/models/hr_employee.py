@@ -1,19 +1,11 @@
-# -*- coding: utf-8 -*-
+from odoo import models, fields, api
 
-# from odoo import models, fields, api
+class HREmployee(models.Model):
+    _inherit = 'hr.employee'
 
-
-# class hr_employee\(models.Model):
-#     _name = 'hr_employee\.hr_employee\'
-#     _description = 'hr_employee\.hr_employee\'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
-
+    deduction_type = fields.Selection([
+        ('standard', 'Standard Deduction'),
+        ('disabled', 'Disabled Person Deduction'),
+        ('family', 'Family Circumstance Deduction'),
+    ], string="Deduction Type", required=True, default='standard') #Giảm trừ bản thân
+    dependent_count = fields.Integer(string="Number of Dependents", default=0)

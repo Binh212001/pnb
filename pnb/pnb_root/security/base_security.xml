@@ -1,33 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Nhóm quyền -->
-    <record id="group_hr_employee" model="res.groups">
-        <field name="name">HR Employee</field>
-        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
-        <field name="category_id" ref="base.module_category_human_resources_employees"/>
-    </record>
+    <data noupdate="0">
+            <record id="hr.group_hr_user" model="res.groups">
+                <field name="implied_ids" eval="[(6, 0,[ref('base.group_user'),ref('pnb_root.group_hr_senior_employee')])]"/>
+            </record>
+        <!-- Nhóm Nhân viên: Chỉ xem thông tin nhân viên -->
+        <record id="group_hr_employee_readonly" model="res.groups">
+            <field name="name">HR Employee Read-Only</field>
+            <field name="category_id" ref="base.module_category_human_resources_employees"/>
+            <field name="comment">The user can only view employee information but cannot modify it.</field>
+        </record>
 
-    <record id="group_hr_manager" model="res.groups">
-        <field name="name">HR Manager</field>
-        <field name="category_id" ref="base.module_category_human_resources_employees"/>
-        <field name="implied_ids" eval="[(4, ref('group_hr_employee'))]"/>
-    </record>
+        <!-- Nhóm Nhân viên cấp cao: Có quyền chỉnh sửa thông tin nhân viên nhưng không thể duyệt tài liệu -->
+        <record id="group_hr_senior_employee" model="res.groups">
+            <field name="name">HR Senior Employee</field>
+            <field name="category_id" ref="base.module_category_human_resources_employees"/>
+            <field name="implied_ids" eval="[(4, ref('group_hr_employee_readonly'))]"/>
+            <field name="comment">The user can edit employee information but cannot approve documents.</field>
+        </record>
 
-    <record id="group_hr_director" model="res.groups">
-        <field name="name">HR Director</field>
-        <field name="category_id" ref="base.module_category_human_resources_employees"/>
-        <field name="implied_ids" eval="[(4, ref('group_hr_manager'))]"/>
-    </record>
-
-    <record id="group_hr_officer" model="res.groups">
-        <field name="name">HR Officer</field>
-        <field name="category_id" ref="base.module_category_human_resources_employees"/>
-        <field name="implied_ids" eval="[(4, ref('group_hr_director'))]"/>
-    </record>
-
-    <record id="group_hr_admin" model="res.groups">
-        <field name="name">HR Admin</field>
-        <field name="category_id" ref="base.module_category_human_resources_employees"/>
-        <field name="implied_ids" eval="[(4, ref('group_hr_officer'))]"/>
-    </record>
+    </data>
 </odoo>

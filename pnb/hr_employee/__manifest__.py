@@ -18,17 +18,14 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr' ,'hr_vn_payroll_tax', 'hr_vn_salary_deductions','hr_vn_tax_insurance'],
+    'depends': ['base', 'hr', 'hr_vn_payroll_tax', 'hr_vn_tax_insurance'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
 }
-

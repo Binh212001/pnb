@@ -34,10 +34,10 @@ class HrPayslip(models.Model):
         string="Structure",
         readonly=True,
         help="Defines the rules that have to be applied to this payslip, "
-        "accordingly to the contract chosen. If you let empty the field "
-        "contract, this field isn't mandatory anymore and thus the rules "
-        "applied will be all the rules set on the structure of all contracts "
-        "of the employee valid for the chosen period",
+             "accordingly to the contract chosen. If you let empty the field "
+             "contract, this field isn't mandatory anymore and thus the rules "
+             "applied will be all the rules set on the structure of all contracts "
+             "of the employee valid for the chosen period",
     )
     name = fields.Char(string="Payslip Name", readonly=True)
     number = fields.Char(
@@ -157,6 +157,33 @@ class HrPayslip(models.Model):
     prevent_compute_on_confirm = fields.Boolean(
         "Prevent Compute on Confirm", compute="_compute_prevent_compute_on_confirm"
     )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        string='Journal Currency',
+    )
+    # //Custom fields
+    base_salary  = fields.Monetary("Base salary", compute="_compute_base_salary")
+    sum_salary = fields.Monetary("Sum salary")
+    real_salary = fields.Monetary("Real salary")
+    salary_13 = fields.Boolean("Salary 13")
+    hour_worked_by_calendar = fields.Integer("Hour worked by Calendar")
+    hour_must_work = fields.Integer("Hour must work")
+    day_worked_by_calendar = fields.Integer("Day worked by Calendar")
+    day_must_work = fields.Integer("Day must work")
+
+    sum_hour_leave = fields.Integer("Sum hour leave")
+    hour_of_leave_not_salary = fields.Integer("Hour of leave not salary")
+    sum_hour_day = fields.Integer("Sum hour day")
+    day_of_leave_not_salary = fields.Integer("Day of leave not salary")
+
+    #
+    self_discount = fields.Integer("Self discount")
+    dependency_discount = fields.Integer("Dependency discount")
+
+
+    def _compute_base_salary(self):
+        for record in self:
+            record.base_salary = record.employee_id.contract_id.wage
 
     def _compute_allow_cancel_payslips(self):
         self.allow_cancel_payslips = (
@@ -206,8 +233,8 @@ class HrPayslip(models.Model):
 
     def action_payslip_done(self):
         if (
-            not self.env.context.get("without_compute_sheet")
-            and not self.prevent_compute_on_confirm
+                not self.env.context.get("without_compute_sheet")
+                and not self.prevent_compute_on_confirm
         ):
             self.compute_sheet()
         return self.write({"state": "done"})
@@ -293,7 +320,7 @@ class HrPayslip(models.Model):
         """
         res = []
         for contract in contracts.filtered(
-            lambda contract: contract.resource_calendar_id
+                lambda contract: contract.resource_calendar_id
         ):
             day_from = datetime.combine(date_from, time.min)
             day_to = datetime.combine(date_to, time.max)
@@ -531,7 +558,7 @@ class HrPayslip(models.Model):
         )
 
     def _get_lines_dict(
-        self, rule, localdict, lines_dict, key, values, previous_amount
+            self, rule, localdict, lines_dict, key, values, previous_amount
     ):
         total = values["quantity"] * values["rate"] * values["amount"] / 100.0
         values["total"] = total
@@ -624,7 +651,7 @@ class HrPayslip(models.Model):
         return localdict
 
     def get_payslip_vals(
-        self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
+            self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
     ):
         # Initial default values for generated payslips
         employee = self.env["hr.employee"].browse(employee_id)
@@ -685,7 +712,7 @@ class HrPayslip(models.Model):
             )
         if category.code:
             localdict["categories"].dict[category.code] = (
-                localdict["categories"].dict.get(category.code, 0) + amount
+                    localdict["categories"].dict.get(category.code, 0) + amount
             )
         return localdict
 
@@ -732,9 +759,9 @@ class HrPayslip(models.Model):
         for payslip in self:
             # Return if required values are not present.
             if (
-                (not payslip.employee_id)
-                or (not payslip.date_from)
-                or (not payslip.date_to)
+                    (not payslip.employee_id)
+                    or (not payslip.date_from)
+                    or (not payslip.date_to)
             ):
                 continue
             # Assign contract_id automatically when the user don't selected one.

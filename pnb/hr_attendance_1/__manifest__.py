@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "hr_vn_tax_insurance",
+    'name': "hr_attendance",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -18,17 +18,14 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr'],
+    'depends': ['base',"hr_attendance"],
 
     # always loaded
     'data': [
-        'security/isr_security.xml',
-        'security/ir.model.access.csv',
-        'views/hr_social_insurance_view.xml',
-        'views/hr_unemployment_insurance_view.xml',
-        'views/hr_health_insurance_view.xml',
-        'views/menu_item.xml',
-        # 'views/templates.xml',
+        # 'security/ir.model.access.csv',
+        'views/views.xml',
+        'views/templates.xml',
+        'views/attendance_cron.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
